@@ -5,7 +5,6 @@ from django.views.generic import ListView
 import redis
 
 
-#here you have to initialize Redis and push here a command 
 class ProductListView(ListView):
     context_object_name = 'products_list'
     queryset = Product.objects.all()
