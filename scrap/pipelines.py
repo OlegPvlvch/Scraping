@@ -18,7 +18,7 @@ class ProductPipeline(object):
     
     def process_item(self, item, spides):
         self.items.append(item._values)
-        if len(self.items) > 15:
+        if len(self.items) >= 15:
             save_products.delay(self.items)
             self.items.clear()
         return item

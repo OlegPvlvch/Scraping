@@ -102,7 +102,7 @@ DOWNLOAD_DELAY = 0.1
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
 
 
-script_path = os.path.join('/home/oleg/projects/scraping/scraping/scraping_project')
+script_path = os.path.join('/home/oleg/projects/scraping/scraping', 'scraping_project')
 sys.path.append(script_path)
 #sys.path.insert(0, '/home/oleg/projects/scraping/scraping/scraping_project')
 os.environ['DJANGO_SETTINGS_MODULE'] = 'scraping_project.settings'
