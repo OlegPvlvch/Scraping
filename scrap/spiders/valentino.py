@@ -14,14 +14,20 @@ class ValentinoSpider(RedisSpider):
         links = response.xpath(
             "//section[contains(@id, 'wrapper-product-lists')]/ul[contains(@class, 'products__list')]/li/a/@href"
         ).extract()
+        category = response.xpath(
+            "//span[contains(@class, 'searchresult__title')]/h1/text()"
+        ).extract_first()
         for url in links:
-            yield scrapy.Request(url=url, callback=self.parse_product)
+            yield scrapy.Request(url=url, 
+                                callback=self.parse_product,
+                                meta={
+                                    'category':category
+                                })
     
     def parse_product(self, response):
         item = ProductItem()
         #category, price, title, colors, sizes, images, description
-        item['category'] = response.xpath(
-            "//ul[contains(@class, 'breadcrumbs')]/li[contains(@class, 'level_3')]/a/span[contains(@class, 'text')]/text()").extract()
+        item['category'] = response.meta['category']
         item['price'] = response.xpath(
             "//div[contains(@class, 'price')]//span[contains(@class, 'value')]/text()").extract_first()
         item['title'] = response.xpath(
